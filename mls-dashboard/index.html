@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>MLS Recruiter — Success Ishola</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,500&family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-brand">
+    <div class="brand-orb"></div>
+    <div>
+      <div class="brand-name">MLS Recruiter</div>
+      <div class="brand-sub">Success O. Ishola</div>
+    </div>
+  </div>
+  <nav class="sidebar-nav">
+    <a class="nav-item active" data-tab="dashboard" onclick="nav(this)">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+      Dashboard
+    </a>
+    <a class="nav-item" data-tab="run" onclick="nav(this)">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      Run Search
+    </a>
+    <a class="nav-item" data-tab="results" onclick="nav(this)">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      Job Results
+      <span class="nav-badge" id="results-badge"></span>
+    </a>
+    <a class="nav-item" data-tab="schedule" onclick="nav(this)">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      Schedule
+      <span class="nav-badge sched" id="sched-badge" style="display:none">ON</span>
+    </a>
+    <a class="nav-item" data-tab="settings" onclick="nav(this)">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      Settings
+    </a>
+    <a class="nav-item" data-tab="history" onclick="nav(this)">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      History
+    </a>
+  </nav>
+  <div class="sidebar-footer">
+    <span class="status-dot" id="status-dot"></span>
+    <span id="status-label">Ready</span>
+  </div>
+</aside>
+
+<main class="main">
+  <div class="topbar">
+    <button class="hamburger" onclick="document.getElementById('sidebar').classList.toggle('open')">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <span class="topbar-title" id="topbar-title">Dashboard</span>
+    <div class="topbar-right">
+      <span class="topbar-date" id="topbar-date"></span>
+      <button class="run-now-btn" onclick="nav(document.querySelector('[data-tab=run]'));setTimeout(runDigest,100)">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        Run now
+      </button>
+    </div>
+  </div>
+
+  <!-- DASHBOARD -->
+  <section class="pane active" id="tab-dashboard">
+    <div class="page-head">
+      <div>
+        <h1 class="serif-title">Good <span id="greeting"></span>, Success.</h1>
+        <p class="page-desc">Your AI recruiter is tracking <em>20 active listings</em> across 5 boards.</p>
+      </div>
+    </div>
+    <div class="kpi-row">
+      <div class="kpi accent-kpi">
+        <div class="kpi-num" id="kpi-total">20</div>
+        <div class="kpi-lbl">Total matches</div>
+        <div class="kpi-sub">Last search</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-num green" id="kpi-t1">7</div>
+        <div class="kpi-lbl">Tier 1</div>
+        <div class="kpi-sub">Score 88+</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-num blue" id="kpi-next-time">9:00 AM</div>
+        <div class="kpi-lbl">Next auto-run</div>
+        <div class="kpi-sub" id="kpi-next-sub">Scheduler off</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-num amber" id="kpi-emails">0</div>
+        <div class="kpi-lbl">Emails sent</div>
+        <div class="kpi-sub">All time</div>
+      </div>
+    </div>
+    <div class="two-col">
+      <div class="card">
+        <div class="card-head"><span class="card-title">Top matches</span><a class="card-link" onclick="nav(document.querySelector('[data-tab=results]'))">See all →</a></div>
+        <div id="top-matches"></div>
+      </div>
+      <div class="stack">
+        <div class="card countdown-card">
+          <div class="card-title">Next scheduled run</div>
+          <div class="cd-time" id="dash-cd">--:--:--</div>
+          <div class="cd-label" id="dash-cd-label">Scheduler is off</div>
+          <div class="prog-track"><div class="prog-fill" id="dash-prog" style="width:0%"></div></div>
+        </div>
+        <div class="card">
+          <div class="card-title" style="margin-bottom:.875rem">Quick actions</div>
+          <div class="qa-grid">
+            <button class="qa" onclick="nav(document.querySelector('[data-tab=run]'));setTimeout(runDigest,100)">&#9654; Run search</button>
+            <button class="qa" onclick="previewEmail()">&#9993; Preview email</button>
+            <button class="qa" onclick="nav(document.querySelector('[data-tab=schedule]'))">&#128197; Schedule</button>
+            <button class="qa" onclick="nav(document.querySelector('[data-tab=settings]'))">&#9881; API keys</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card boards-card">
+      <div class="card-head"><span class="card-title">Boards monitored</span><span class="pill-green">5 active</span></div>
+      <div class="boards">
+        <div class="board"><span class="board-dot"></span>Indeed Nigeria</div>
+        <div class="board"><span class="board-dot"></span>HotNigerianJobs</div>
+        <div class="board"><span class="board-dot"></span>MyJobMag</div>
+        <div class="board"><span class="board-dot"></span>Glassdoor NG</div>
+        <div class="board"><span class="board-dot"></span>SmartRecruiters</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RUN SEARCH -->
+  <section class="pane" id="tab-run">
+    <div class="page-head">
+      <h1 class="serif-title">Run Search</h1>
+      <p class="page-desc">Search job boards and send your digest now.</p>
+    </div>
+    <div class="two-col">
+      <div class="card">
+        <div class="card-title" style="margin-bottom:1.25rem">Options</div>
+        <div class="fg"><label class="fl">Send to</label><input class="fi" type="email" id="run-email" value="success.sholly@icloud.com"/></div>
+        <div class="fg"><label class="fl">Location</label>
+          <select class="fi" id="run-location">
+            <option value="all">All Nigeria</option>
+            <option value="abuja" selected>Abuja only</option>
+            <option value="lagos">Lagos only</option>
+            <option value="abuja,lagos">Abuja + Lagos</option>
+          </select>
+        </div>
+        <div class="fg"><label class="fl">Min score: <span id="score-out">70</span></label>
+          <input type="range" class="fi-range" min="50" max="95" value="70" id="run-minscore" oninput="document.getElementById('score-out').textContent=this.value"/>
+        </div>
+        <div class="toggles">
+          <div class="tog-row">
+            <div><div class="tl">Include Tier 3 matches</div><div class="ts">Score 52–69</div></div>
+            <label class="sw"><input type="checkbox" id="tog-t3" checked/><span class="sw-t"></span></label>
+          </div>
+          <div class="tog-row">
+            <div><div class="tl">Auto-send email</div><div class="ts">Opens mail client if no Gmail key</div></div>
+            <label class="sw"><input type="checkbox" id="tog-email" checked/><span class="sw-t"></span></label>
+          </div>
+        </div>
+        <div class="btn-row">
+          <button class="btn-p" id="run-btn" onclick="runDigest()">&#9654; Run job search</button>
+          <button class="btn-g" onclick="previewEmail()">Preview email</button>
+        </div>
+      </div>
+      <div class="stack">
+        <div class="card" style="flex:1">
+          <div class="card-title" style="margin-bottom:.75rem">Run log</div>
+          <div class="prog-track" id="rpt" style="margin-bottom:.75rem;opacity:0"><div class="prog-fill" id="run-prog" style="width:0%"></div></div>
+          <div class="terminal" id="log-box"><span class="dim">Waiting for run...</span></div>
+        </div>
+        <div id="run-banner" class="banner" style="display:none"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULTS -->
+  <section class="pane" id="tab-results">
+    <div class="page-head">
+      <h1 class="serif-title">Job Results</h1>
+      <div class="filter-pills">
+        <button class="fpill active" data-f="all" onclick="filterResults('all',this)">All</button>
+        <button class="fpill" data-f="abuja" onclick="filterResults('abuja',this)">Abuja</button>
+        <button class="fpill" data-f="lagos" onclick="filterResults('lagos',this)">Lagos</button>
+        <button class="fpill" data-f="t1" onclick="filterResults('t1',this)">Tier 1 only</button>
+      </div>
+    </div>
+    <div class="card table-card">
+      <div id="results-empty" class="empty">No results yet — run a search first.</div>
+      <div id="results-wrap" style="display:none;overflow-x:auto">
+        <table class="rtable" id="results-table">
+          <thead><tr><th>Role</th><th>Location</th><th>Salary</th><th>Skills</th><th>Apply</th><th>Score</th></tr></thead>
+          <tbody id="results-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCHEDULE -->
+  <section class="pane" id="tab-schedule">
+    <div class="page-head">
+      <h1 class="serif-title">Schedule</h1>
+      <p class="page-desc">Automate your daily job digest.</p>
+    </div>
+    <div class="two-col">
+      <div class="card">
+        <div class="card-title" style="margin-bottom:1.25rem">Configure</div>
+        <div class="fg"><label class="fl">Run time</label><input class="fi" type="time" id="sched-time" value="09:00"/></div>
+        <div class="fg"><label class="fl">Active days</label>
+          <div class="day-pills" id="day-pills">
+            <span class="dp on" data-day="1">Mon</span><span class="dp on" data-day="2">Tue</span>
+            <span class="dp on" data-day="3">Wed</span><span class="dp on" data-day="4">Thu</span>
+            <span class="dp on" data-day="5">Fri</span><span class="dp" data-day="6">Sat</span>
+            <span class="dp" data-day="0">Sun</span>
+          </div>
+        </div>
+        <div class="toggles">
+          <div class="tog-row">
+            <div><div class="tl">Scheduler active</div><div class="ts">Tab must stay open</div></div>
+            <label class="sw"><input type="checkbox" id="sched-enabled" onchange="toggleScheduler()"/><span class="sw-t"></span></label>
+          </div>
+        </div>
+        <button class="btn-p" style="margin-top:1.25rem" onclick="saveSchedule()">Save schedule</button>
+        <div id="sched-banner" class="banner" style="display:none;margin-top:1rem"></div>
+      </div>
+      <div class="stack">
+        <div class="card countdown-card-lg">
+          <div class="card-title">Next run in</div>
+          <div class="cd-lg" id="sched-cd">--:--:--</div>
+          <div class="cd-sub" id="sched-cd-sub">Enable scheduler above</div>
+          <div class="prog-track" style="margin-top:1.25rem"><div class="prog-fill" id="sched-prog" style="width:0%"></div></div>
+        </div>
+        <div class="card">
+          <div class="card-title" style="margin-bottom:.75rem">How it works</div>
+          <ol class="how-list">
+            <li>Set your time and active days above.</li>
+            <li>Toggle the scheduler ON and save.</li>
+            <li>Keep this page open in a browser tab.</li>
+            <li>It fires automatically, searches boards, and emails your digest.</li>
+          </ol>
+          <div class="tip">💡 Pin the tab in Chrome so it persists across browser restarts.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SETTINGS -->
+  <section class="pane" id="tab-settings">
+    <div class="page-head">
+      <h1 class="serif-title">Settings</h1>
+      <p class="page-desc">Stored in your browser only. Never sent anywhere.</p>
+    </div>
+    <div class="settings-cols">
+      <div class="card">
+        <div class="card-title">API Keys</div>
+        <p class="card-desc">Add your Anthropic key for live AI search. Add a Gmail OAuth token for automatic sending.</p>
+        <div class="fg"><label class="fl">Anthropic API key</label>
+          <div class="pw-wrap"><input class="fi" type="password" id="anthropic-key" placeholder="sk-ant-api03-..."/><button class="eye" onclick="toggleVis('anthropic-key',this)">Show</button></div>
+          <div class="fhint">Get yours at <a href="https://console.anthropic.com" target="_blank" class="a-link">console.anthropic.com</a></div>
+        </div>
+        <div class="fg"><label class="fl">Gmail OAuth token</label>
+          <div class="pw-wrap"><input class="fi" type="password" id="gmail-key" placeholder="ya29..."/><button class="eye" onclick="toggleVis('gmail-key',this)">Show</button></div>
+          <div class="fhint">Without this, your mail client opens instead of auto-sending.</div>
+        </div>
+        <button class="btn-p" onclick="saveSettings()">Save keys</button>
+        <div id="settings-banner" class="banner" style="display:none;margin-top:1rem"></div>
+      </div>
+      <div class="card">
+        <div class="card-title">Profile</div>
+        <p class="card-desc">Used to personalise search queries and match scoring.</p>
+        <div class="fg"><label class="fl">Full name</label><input class="fi" type="text" id="pref-name" value="Success Oluwafemi Ishola"/></div>
+        <div class="fg"><label class="fl">Default email</label><input class="fi" type="email" id="pref-email" value="success.sholly@icloud.com"/></div>
+        <div class="fg"><label class="fl">Role keywords</label><input class="fi" type="text" id="pref-roles" value="Medical Laboratory Scientist, Haematology, Blood Bank"/></div>
+        <div class="two-fg">
+          <div class="fg"><label class="fl">Location</label><input class="fi" type="text" id="pref-location" value="Abuja, Nigeria"/></div>
+          <div class="fg"><label class="fl">Min score</label><input class="fi" type="number" id="pref-minscore" value="70" min="0" max="100" style="width:80px"/></div>
+        </div>
+        <button class="btn-p" onclick="saveProfile()">Save profile</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- HISTORY -->
+  <section class="pane" id="tab-history">
+    <div class="page-head">
+      <h1 class="serif-title">Run History</h1>
+      <button class="btn-g-sm" onclick="clearHistory()">Clear all</button>
+    </div>
+    <div class="card table-card">
+      <table class="rtable">
+        <thead><tr><th>Date &amp; time</th><th>Matches</th><th>Tier 1</th><th>Sent to</th><th>Trigger</th><th>Status</th></tr></thead>
+        <tbody id="hist-tbody"><tr><td colspan="6" class="empty">No history yet.</td></tr></tbody>
+      </table>
+    </div>
+  </section>
+
+</main>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
